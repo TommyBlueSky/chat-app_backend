@@ -6,7 +6,11 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONT_URL, //アクセス許可するオリジン
+    credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
+    optionsSuccessStatus: 200 //レスポンスstatusを200に設定
+}));
 app.use(express.json()); // JSONの受信を許可
 
 // MySQLの接続設定（本番公開時には.envファイルに書き換える）
