@@ -11,11 +11,11 @@ app.use(express.json()); // JSONの受信を許可
 
 // MySQLの接続設定（本番公開時には.envファイルに書き換える）
 const db = mysql.createConnection({
-    host: DB_HOST,
-    port: DB_PORT,
-    user: DB_USERNAME,
-    password: DB_PASSWORD,
-    database: DB_DATABASE,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     charset: 'utf8mb4'
 });
 
