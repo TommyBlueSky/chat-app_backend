@@ -6,8 +6,15 @@ const mysql = require('mysql');
 const cors = require('cors');
 
 const app = express();
+
 app.use(cors({
-    origin: process.env.FRONT_URL, //アクセス許可するオリジン
+    origin: function (origin, callback) {
+        if (!origin || process.env.FRONT_URL.indexOf(origin) !== -1) {
+            callback(null, origin);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
     optionsSuccessStatus: 200 //レスポンスstatusを200に設定
 }));
