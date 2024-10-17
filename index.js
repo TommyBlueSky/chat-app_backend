@@ -11,11 +11,11 @@ app.use(express.json()); // JSONの受信を許可
 
 // MySQLの接続設定（本番公開時には.envファイルに書き換える）
 const db = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'root',
-    database: 'chat_app',
+    host: DB_HOST,
+    port: DB_PORT,
+    user: DB_USERNAME,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
     charset: 'utf8mb4'
 });
 
@@ -71,7 +71,6 @@ app.delete('/messages/:id', (req, res) => {
 });
 
 // サーバーを起動
-const PORT = 5000;
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(process.env.DB_PORT || 5000, () => {
+  console.log(`Server is running`);
 });
